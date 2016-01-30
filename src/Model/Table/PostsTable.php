@@ -29,6 +29,7 @@ class PostsTable extends Table
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
+        $this->hasMany('Comments');
 
     }
 

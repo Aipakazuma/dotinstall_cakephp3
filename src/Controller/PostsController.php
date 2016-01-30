@@ -2,6 +2,7 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\ORM\TableRegistry;
 
 /**
  * Posts Controller
@@ -32,7 +33,7 @@ class PostsController extends AppController
     public function view($id = null)
     {
         $post = $this->Posts->get($id, [
-            'contain' => []
+            'contain' => 'Comments'
         ]);
         $this->set('post', $post);
         $this->set('_serialize', ['post']);

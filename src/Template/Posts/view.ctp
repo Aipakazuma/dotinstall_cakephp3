@@ -31,4 +31,30 @@
         <h4><?= __('Body') ?></h4>
         <?= $this->Text->autoParagraph(h($post->body)); ?>
     </div>
+    <div class="row">
+        <h4>Comments</h4>
+        <ul>
+            <?php foreach ($post->comments as $comment): ?>
+            <li><?= h($comment->body) ?><span><?= $this->Form->postLink(
+                    '[x]',
+                    ['controller' => 'Comments', 'action' => 'delete', $comment->id],
+                    ['confirm' => 'Are you sure?']
+                );?></span></li>
+            <?php endforeach; ?>
+        </ul>
+    </div>
+    <div class="row">
+        <?= $this->Form->create(null, [
+            'url' => ['controller' => 'Comments', 'action' => 'add']
+        ]) ?>
+        <fieldset>
+            <legend><?= __('Add Post') ?></legend>
+            <?php
+                echo $this->Form->input('body');
+                echo $this->Form->hidden('post_id', ['value' => $post->id]);
+            ?>
+        </fieldset>
+        <?= $this->Form->button(__('Add')) ?>
+        <?= $this->Form->end() ?>
+    </div>
 </div>
